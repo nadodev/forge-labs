@@ -44,7 +44,6 @@
                         <span class="cart-badge" aria-label="Itens no carrinho">{{ $cartCount }}</span>
                     @endif
                 </a>
-                <button id="themeToggle" class="btn ghost" aria-label="Alternar tema">🌙</button>
                 @auth
                     <form method="POST" action="{{ route('logout') }}" style="display:inline">
                         @csrf
@@ -87,7 +86,6 @@
                         @endif
                     </a>
                     
-                    <button id="mobileThemeToggle" class="mobile-theme-btn" aria-label="Alternar tema">🌙</button>
                     
                     @auth
                         <form method="POST" action="{{ route('logout') }}" style="display:inline">

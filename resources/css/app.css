@@ -3461,6 +3461,15 @@ h1, h2, h3, h4, h5, h6 {
   }
 }
 
+/* Form Help Styles */
+.form-help {
+  display: block;
+  margin-top: var(--space-xs);
+  font-size: 0.875rem;
+  color: hsl(var(--muted-foreground));
+  line-height: 1.4;
+}
+
 @media (max-width: 340px) {
   .system-card-header {
     flex-direction: column;

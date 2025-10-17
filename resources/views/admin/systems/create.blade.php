@@ -25,6 +25,16 @@
         <label>Descrição Completa</label>
         <textarea name="full_description" rows="8" placeholder="Descrição detalhada do sistema...">{{ old('full_description') }}</textarea>
     </div>
+    <div class="form-group">
+        <label>Recursos (um por linha)</label>
+        <textarea name="features" rows="6" placeholder="Ex: Sistema de autenticação&#10;Dashboard administrativo&#10;API REST completa">{{ old('features') }}</textarea>
+        <small class="form-help">Digite cada recurso em uma linha separada</small>
+    </div>
+    <div class="form-group">
+        <label>Tecnologias (uma por linha)</label>
+        <textarea name="technologies" rows="4" placeholder="Ex: Laravel&#10;Vue.js&#10;MySQL&#10;Bootstrap">{{ old('technologies') }}</textarea>
+        <small class="form-help">Digite cada tecnologia em uma linha separada</small>
+    </div>
     <div class="grid-3">
         <div class="form-group">
             <label>Categoria</label>

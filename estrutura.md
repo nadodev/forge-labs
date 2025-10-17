@@ -246,9 +246,7 @@ Animações suaves (Framer Motion / GSAP)
 
 Notificações automáticas (“Novo projeto publicado!”)
 
-Busca inteligente (IA via Groq / OpenAI)
-
-Chat com assistente sobre os sistemas
+Busca inteligente ()
 
 Página “Em desenvolvimento” com barra de progresso visual
 

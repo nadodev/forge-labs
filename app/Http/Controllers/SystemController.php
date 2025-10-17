@@ -31,6 +31,13 @@ class SystemController extends Controller
             $query->where('license_type', $request->licenca);
         }
 
+        if ($request->filled('linguagem')) {
+            $tag = Tag::where('slug', $request->linguagem)->first();
+            if ($tag) {
+                $query->byTag($tag->id);
+            }
+        }
+
         // Aplicar ordenação
         $sort = $request->get('sort', 'date');
         switch ($sort) {
@@ -66,7 +73,7 @@ class SystemController extends Controller
 
         $languages = Tag::where('is_active', true)
             ->orderBy('name')
-            ->get();
+            ->pluck('name', 'slug');
 
         return view('systems.index', compact('systems', 'categories', 'licenses', 'languages'));
     }

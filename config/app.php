@@ -213,4 +213,16 @@ return [
         'View' => Illuminate\Support\Facades\View::class,
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | WhatsApp Configuration
+    |--------------------------------------------------------------------------
+    |
+    | Configuration for WhatsApp integration
+    |
+    */
+    'whatsapp' => [
+        'number' => env('WHATSAPP_NUMBER', '5511999999999'),
+    ],
+
 ];

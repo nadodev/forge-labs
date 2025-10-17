@@ -79,7 +79,7 @@ class StripeController extends Controller
 
     public function cancel(Order $order)
     {
-        return redirect()->route('cart.index')->with('success', 'Pagamento cancelado.');
+        return redirect()->route('cart.index')->with('error', 'Pagamento cancelado. Você pode tentar novamente.');
     }
 
     public function webhook(Request $request)

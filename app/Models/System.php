@@ -65,6 +65,23 @@ class System extends Model
         return $this->hasMany(Review::class)->where('is_approved', true);
     }
 
+    public function orderItems()
+    {
+        return $this->hasMany(OrderItem::class);
+    }
+
+    public function paidDownloadsCount(): int
+    {
+        return (int) $this->orderItems()
+            ->whereHas('order', function ($q) { $q->where('payment_status', 'paid'); })
+            ->sum('quantity');
+    }
+
+    public function averageRating(): float
+    {
+        return round((float) $this->approvedReviews()->avg('rating') ?? 0, 2);
+    }
+
     public function getRouteKeyName()
     {
         return 'slug';

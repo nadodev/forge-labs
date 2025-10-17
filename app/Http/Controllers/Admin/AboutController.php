@@ -37,10 +37,13 @@ class AboutController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'icon' => 'nullable|string|max:10',
-            'level' => 'nullable|string|max:50',
+            'icon' => 'nullable|string|max:50',
+            'level' => 'nullable|integer|min:0|max:100',
             'sort_order' => 'nullable|integer'
         ]);
+        if (!isset($data['sort_order'])) {
+            $data['sort_order'] = (int) (StackItem::max('sort_order') ?? 0) + 1;
+        }
         StackItem::create($data);
         return back()->with('success', 'Stack adicionada.');
     }
@@ -49,11 +52,14 @@ class AboutController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'icon' => 'nullable|string|max:10',
-            'level' => 'nullable|string|max:50',
+            'icon' => 'nullable|string|max:50',
+            'level' => 'nullable|integer|min:0|max:100',
             'sort_order' => 'nullable|integer',
             'is_active' => 'sometimes|boolean'
         ]);
+        if (!isset($data['sort_order'])) {
+            $data['sort_order'] = $stackItem->sort_order ?? ((int) (StackItem::max('sort_order') ?? 0) + 1);
+        }
         $stackItem->update($data);
         return back()->with('success', 'Stack atualizada.');
     }

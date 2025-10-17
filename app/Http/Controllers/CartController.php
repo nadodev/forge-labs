@@ -36,24 +36,24 @@ class CartController extends Controller
         return back()->with('success', 'Adicionado ao carrinho.');
     }
 
-    public function update(Request $request, System $system)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'quantity' => 'required|integer|min:1|max:99'
         ]);
         $cart = $request->session()->get('cart', []);
-        if (isset($cart[$system->id])) {
-            $cart[$system->id]['quantity'] = (int) $request->quantity;
+        if (isset($cart[$id])) {
+            $cart[$id]['quantity'] = (int) $request->quantity;
             $request->session()->put('cart', $cart);
             return back()->with('success', 'Quantidade atualizada.');
         }
         return back();
     }
 
-    public function remove(Request $request, System $system)
+    public function remove(Request $request, $id)
     {
         $cart = $request->session()->get('cart', []);
-        unset($cart[$system->id]);
+        unset($cart[$id]);
         $request->session()->put('cart', $cart);
         return back()->with('success', 'Item removido do carrinho.');
     }

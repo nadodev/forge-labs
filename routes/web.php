@@ -12,9 +12,14 @@ use App\Http\Controllers\Admin\TagController as AdminTagController;
 use App\Http\Controllers\Admin\ReviewController as AdminReviewController;
 use App\Http\Controllers\Admin\MessageController as AdminMessageController;
 use App\Http\Controllers\Admin\AboutController as AdminAboutController;
+use App\Http\Controllers\Admin\ProfileController as AdminProfileController;
+use App\Http\Controllers\Admin\StackController as AdminStackController;
+use App\Http\Controllers\Admin\CertificateController as AdminCertificateController;
+use App\Http\Controllers\Admin\TimelineController as AdminTimelineController;
 use App\Http\Controllers\Admin\OrderController as AdminOrderController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\StripeController;
+use App\Http\Controllers\PortfolioController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
@@ -23,6 +28,10 @@ Route::get('/sistema/{system}', [SystemController::class, 'show'])->name('system
 Route::get('/sobre', [AboutController::class, 'index'])->name('about');
 Route::get('/contato', [ContactController::class, 'index'])->name('contact');
 Route::post('/contato', [ContactController::class, 'store'])->name('contact.store');
+
+// Portfolio
+Route::get('/portfolio', [PortfolioController::class, 'index'])->name('portfolio.index');
+Route::get('/portfolio/{portfolio}', [PortfolioController::class, 'show'])->name('portfolio.show');
 
 // Cart
 Route::get('/carrinho', [CartController::class, 'index'])->name('cart.index');
@@ -81,21 +90,41 @@ Route::middleware('auth')->prefix('admin')->name('admin.')->group(function () {
     Route::post('/messages/{message}/read', [AdminMessageController::class, 'markRead'])->name('messages.read');
     Route::delete('/messages/{message}', [AdminMessageController::class, 'destroy'])->name('messages.destroy');
 
-    // About page management
-    Route::get('/about', [AdminAboutController::class, 'index'])->name('about.index');
-    Route::post('/about/profile', [AdminAboutController::class, 'saveProfile'])->name('about.profile.save');
-    Route::post('/about/stack', [AdminAboutController::class, 'storeStack'])->name('about.stack.store');
-    Route::post('/about/stack/{stackItem}', [AdminAboutController::class, 'updateStack'])->name('about.stack.update');
-    Route::delete('/about/stack/{stackItem}', [AdminAboutController::class, 'destroyStack'])->name('about.stack.destroy');
-    Route::post('/about/certificates', [AdminAboutController::class, 'storeCertificate'])->name('about.certificates.store');
-    Route::post('/about/certificates/{certificate}', [AdminAboutController::class, 'updateCertificate'])->name('about.certificates.update');
-    Route::delete('/about/certificates/{certificate}', [AdminAboutController::class, 'destroyCertificate'])->name('about.certificates.destroy');
-    Route::post('/about/timeline', [AdminAboutController::class, 'storeTimeline'])->name('about.timeline.store');
-    Route::post('/about/timeline/{timelineItem}', [AdminAboutController::class, 'updateTimeline'])->name('about.timeline.update');
-    Route::delete('/about/timeline/{timelineItem}', [AdminAboutController::class, 'destroyTimeline'])->name('about.timeline.destroy');
+      // Profile management
+      Route::resource('profile', AdminProfileController::class);
+
+      // Stack management
+      Route::resource('stack', AdminStackController::class);
+
+      // Certificates management
+      Route::resource('certificates', AdminCertificateController::class);
+
+      // Timeline management
+      Route::resource('timeline', AdminTimelineController::class);
+
+      // About page management (legacy - manter para compatibilidade)
+      Route::get('/about', [AdminAboutController::class, 'index'])->name('about.index');
+      Route::post('/about/profile', [AdminAboutController::class, 'saveProfile'])->name('about.profile.save');
+      Route::post('/about/stack', [AdminAboutController::class, 'storeStack'])->name('about.stack.store');
+      Route::post('/about/stack/{stackItem}', [AdminAboutController::class, 'updateStack'])->name('about.stack.update');
+      Route::delete('/about/stack/{stackItem}', [AdminAboutController::class, 'destroyStack'])->name('about.stack.destroy');
+      Route::post('/about/certificates', [AdminAboutController::class, 'storeCertificate'])->name('about.certificates.store');
+      Route::post('/about/certificates/{certificate}', [AdminAboutController::class, 'updateCertificate'])->name('about.certificates.update');
+      Route::delete('/about/certificates/{certificate}', [AdminAboutController::class, 'destroyCertificate'])->name('about.certificates.destroy');
+      Route::post('/about/timeline', [AdminAboutController::class, 'storeTimeline'])->name('about.timeline.store');
+      Route::post('/about/timeline/{timelineItem}', [AdminAboutController::class, 'updateTimeline'])->name('about.timeline.update');
+      Route::delete('/about/timeline/{timelineItem}', [AdminAboutController::class, 'destroyTimeline'])->name('about.timeline.destroy');
 
     // Orders management
     Route::get('/orders', [AdminOrderController::class, 'index'])->name('orders.index');
     Route::get('/orders/{order}', [AdminOrderController::class, 'show'])->name('orders.show');
     Route::patch('/orders/{order}/status', [AdminOrderController::class, 'updateStatus'])->name('orders.update-status');
+
+    // Portfolio admin
+    Route::get('/portfolio', [\App\Http\Controllers\Admin\PortfolioController::class, 'index'])->name('portfolio.index');
+    Route::get('/portfolio/create', [\App\Http\Controllers\Admin\PortfolioController::class, 'create'])->name('portfolio.create');
+    Route::post('/portfolio', [\App\Http\Controllers\Admin\PortfolioController::class, 'store'])->name('portfolio.store');
+    Route::get('/portfolio/{portfolio}/edit', [\App\Http\Controllers\Admin\PortfolioController::class, 'edit'])->name('portfolio.edit');
+    Route::put('/portfolio/{portfolio}', [\App\Http\Controllers\Admin\PortfolioController::class, 'update'])->name('portfolio.update');
+    Route::delete('/portfolio/{portfolio}', [\App\Http\Controllers\Admin\PortfolioController::class, 'destroy'])->name('portfolio.destroy');
 });

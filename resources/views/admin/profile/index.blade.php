@@ -5,7 +5,7 @@
 @section('admin')
 <div class="flex items-center gap-4 mb-6">
     <h1 class="text-2xl font-bold">Perfil</h1>
-    @if(!$about)
+    @if(!$profile)
         <a href="{{ route('admin.profile.create') }}" class="ml-auto px-4 py-2 rounded-lg bg-gradient-to-r from-blue-600 to-indigo-600 text-white shadow hover:opacity-90">
             Criar Perfil
         </a>
@@ -13,7 +13,7 @@
 </div>
 
 
-    @if($about)
+    @if($profile)
         <div class="bg-white/5 border border-white/10 rounded-lg p-6">
             <div class="flex items-start gap-6">
                 @if($about->photo_url)

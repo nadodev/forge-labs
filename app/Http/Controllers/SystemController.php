@@ -78,8 +78,14 @@ class SystemController extends Controller
         return view('systems.index', compact('systems', 'categories', 'licenses', 'languages'));
     }
 
-    public function show(System $system)
+    public function show($slug)
     {
+
+        $system = System::where('slug', $slug)->first();
+        if (!$system) {
+            abort(404);
+        }
+
         // Incrementar contador de visualizações
         $system->incrementViews();
 

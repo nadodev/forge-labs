@@ -24,7 +24,7 @@ use Illuminate\Support\Facades\Route;
 
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/sistemas', [SystemController::class, 'index'])->name('systems.index');
-Route::get('/sistema/{system}', [SystemController::class, 'show'])->name('systems.show');
+Route::get('/sistema/{slug}', [SystemController::class, 'show'])->name('systems.show');
 Route::get('/sobre', [AboutController::class, 'index'])->name('about');
 Route::get('/contato', [ContactController::class, 'index'])->name('contact');
 Route::post('/contato', [ContactController::class, 'store'])->name('contact.store');

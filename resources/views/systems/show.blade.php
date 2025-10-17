@@ -6,7 +6,7 @@
 <section class="hero system-hero">
     <div class="container">
         <div class="system-hero-content">
-            <div class="system-badge">{{ $system->category->name }}</div>
+            <div class="system-badge">{{ $system->category?->name ?? 'Sem categoria' }}</div>
             <h1 class="headline">{{ $system->name }}</h1>
             <p class="system-description">{{ $system->description }}</p>
             <div class="system-meta">
@@ -55,7 +55,7 @@
         
         <div id="tab-recursos" class="tab-panel">
             <ul class="features-list">
-                @foreach($system->features as $feature)
+                @foreach($system->features ?? [] as $feature)
                 <li class="feature-item">
                     <span class="feature-icon">✓</span>
                     {{ $feature }}
@@ -66,7 +66,7 @@
         
         <div id="tab-tecnologias" class="tab-panel">
             <div class="chip-row">
-                @foreach($system->technologies as $tech)
+                @foreach($system->technologies ?? [] as $tech)
                 <span class="chip tech-chip">{{ $tech }}</span>
                 @endforeach
             </div>

@@ -142,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
+    const loadingOverlay = document.getElementById('loadingOverlay');
     
     form.addEventListener('submit', function(e) {
         const captcha = document.getElementById('captcha').value;
@@ -151,6 +152,7 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
+        loadingOverlay.style.display = 'flex';
         // Show loading state
         submitBtn.disabled = true;
         btnText.style.display = 'none';

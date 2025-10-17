@@ -21,6 +21,10 @@
         <label>Descrição</label>
         <textarea name="description" rows="4" required>{{ old('description') }}</textarea>
     </div>
+    <div class="form-group">
+        <label>Descrição Completa</label>
+        <textarea name="full_description" rows="8" placeholder="Descrição detalhada do sistema...">{{ old('full_description') }}</textarea>
+    </div>
     <div class="grid-3">
         <div class="form-group">
             <label>Categoria</label>

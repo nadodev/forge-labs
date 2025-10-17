@@ -50,7 +50,7 @@
         </div>
         
         <div id="tab-descricao" class="tab-panel active">
-            <p>{{ $system->full_description }}</p>
+            <p>{{ $system->full_description ?: $system->description }}</p>
         </div>
         
         <div id="tab-recursos" class="tab-panel">

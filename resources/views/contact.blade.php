@@ -103,13 +103,27 @@
                     <button type="submit" class="btn primary full-width" id="submitBtn">
                         <span class="btn-text">Enviar mensagem</span>
                         <span class="btn-loading" style="display: none;">
-                            <svg class="animate-spin h-4 w-4" fill="none" viewBox="0 0 24 24">
+                            <svg class="loading-spinner" fill="none" viewBox="0 0 24 24">
                                 <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
                                 <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
                             </svg>
                             Enviando...
                         </span>
                     </button>
+                    
+                    <!-- Loading Overlay -->
+                    <div class="loading-overlay" id="loadingOverlay" style="display: none;">
+                        <div class="loading-content">
+                            <div class="loading-spinner-large">
+                                <svg class="animate-spin" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                                </svg>
+                            </div>
+                            <p class="loading-text">Enviando sua mensagem...</p>
+                            <p class="loading-subtext">Por favor, aguarde</p>
+                        </div>
+                    </div>
                 </form>
             </div>
         </div>
@@ -128,6 +142,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const submitBtn = document.getElementById('submitBtn');
     const btnText = submitBtn.querySelector('.btn-text');
     const btnLoading = submitBtn.querySelector('.btn-loading');
+    const loadingOverlay = document.getElementById('loadingOverlay');
     
     form.addEventListener('submit', function(e) {
         const captcha = document.getElementById('captcha').value;
@@ -137,12 +152,24 @@ document.addEventListener('DOMContentLoaded', function() {
             return;
         }
         
-        // Show loading state
+        // Show loading state - block everything
         submitBtn.disabled = true;
         btnText.style.display = 'none';
         btnLoading.style.display = 'inline-flex';
         btnLoading.style.alignItems = 'center';
         btnLoading.style.gap = '8px';
+        
+        // Show overlay loading
+        loadingOverlay.style.display = 'flex';
+        
+        // Disable all form inputs
+        const inputs = form.querySelectorAll('input, textarea, select, button');
+        inputs.forEach(input => {
+            input.disabled = true;
+        });
+        
+        // Prevent any further interaction
+        form.style.pointerEvents = 'none';
     });
 });
 

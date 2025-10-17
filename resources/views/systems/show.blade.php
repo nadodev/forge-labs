@@ -50,7 +50,9 @@
         </div>
         
         <div id="tab-descricao" class="tab-panel active">
-            <p>{{ $system->full_description ?: $system->description }}</p>
+            <div class="markdown-content">
+                {!! \App\Helpers\MarkdownHelper::parse($system->full_description ?: $system->description) !!}
+            </div>
         </div>
         
         <div id="tab-recursos" class="tab-panel">

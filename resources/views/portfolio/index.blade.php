@@ -8,43 +8,64 @@
     <h1 class="page-title">Portfólio</h1>
     <p class="subhead">Projetos e sistemas não comercializados, selecionados do meu trabalho.</p>
 
-    <div class="cards grid" style="grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 1.5rem;">
+    <div class="portfolio-grid">
       @forelse($items as $item)
-      <article class="card portfolio-card" style="height: fit-content; overflow: hidden;">
+      <article class="portfolio-card">
         @if($item->image)
-        <div class="card-image" style="height: 200px; overflow: hidden;">
-          <img src="{{ $item->image }}" alt="{{ $item->title }}" style="width: 100%; height: 100%; object-fit: cover;">
+        <div class="portfolio-image">
+          <img src="{{ $item->image }}" alt="{{ $item->title }}">
         </div>
         @else
-        <div class="card-image" style="height: 200px; background: var(--gradient-card); display: flex; align-items: center; justify-content: center;">
-          <span class="card-icon" style="font-size: 3rem; opacity: 0.6;">🧩</span>
+        <div class="portfolio-image portfolio-placeholder">
+          <span class="portfolio-icon">🧩</span>
         </div>
         @endif
-        <div class="card-content" style="padding: 1.5rem;">
-          <div class="card-header" style="margin-bottom: 1rem;">
-            <div class="card-badge" style="margin-bottom: 0.5rem;">Portfólio</div>
-            <h3 class="card-title" style="margin: 0; font-size: 1.25rem; line-height: 1.4;">
-              <a href="{{ route('portfolio.show', $item->slug) }}" style="color: inherit; text-decoration: none;">{{ $item->title }}</a>
+        
+        <div class="portfolio-content">
+          <div class="portfolio-header">
+            <div class="portfolio-badge">Portfólio</div>
+            <h3 class="portfolio-title">
+              <a href="{{ route('portfolio.show', $item->slug) }}">{{ $item->title }}</a>
             </h3>
           </div>
-          <p class="card-description" style="margin-bottom: 1rem; font-size: 0.95rem; line-height: 1.5; color: hsl(var(--muted-foreground));">
+          
+          <p class="portfolio-description">
             {{ $item->subtitle ?: Str::limit($item->description, 120) }}
           </p>
+          
           @if($item->technologies)
-          <div class="card-tags" style="margin-bottom: 1.5rem;">
+          <div class="portfolio-technologies">
             @foreach($item->technologies as $tech)
-              <span class="tag" style="font-size: 0.8rem; padding: 0.25rem 0.5rem;">{{ $tech }}</span>
+              <span class="tech-tag">{{ $tech }}</span>
             @endforeach
           </div>
           @endif
-          <div class="card-footer" style="margin-top: auto;">
-            <div class="card-actions" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
-              <a href="{{ route('portfolio.show', $item->slug) }}" class="btn ghost small">Detalhes</a>
+          
+          <div class="portfolio-actions">
+            <a href="{{ route('portfolio.show', $item->slug) }}" class="btn primary small">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                <circle cx="12" cy="12" r="3"/>
+              </svg>
+              Ver detalhes
+            </a>
+            
+            <div class="portfolio-links">
               @if($item->demo_url)
-                <a href="{{ $item->demo_url }}" target="_blank" class="btn secondary small">Demo</a>
+                <a href="{{ $item->demo_url }}" target="_blank" class="portfolio-link" title="Ver demo">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                    <polyline points="15,3 21,3 21,9"/>
+                    <line x1="10" y1="14" x2="21" y2="3"/>
+                  </svg>
+                </a>
               @endif
               @if($item->github_url)
-                <a href="{{ $item->github_url }}" target="_blank" class="btn small">GitHub</a>
+                <a href="{{ $item->github_url }}" target="_blank" class="portfolio-link" title="Ver código">
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
+                  </svg>
+                </a>
               @endif
             </div>
           </div>

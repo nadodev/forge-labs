@@ -152,16 +152,8 @@
     </div>
 </section>
 
-<section class="container section">
-    <h2 class="section-title">Demonstração</h2>
-    <div class="video-demo">
-        <video controls muted loop preload="metadata" poster="/images/demo-poster.jpg">
-            <source src="/videos/demo.mp4" type="video/mp4">
-            Seu navegador não suporta o elemento de vídeo.
-        </video>
-    </div>
-</section>
-
+@php $feedback = true; @endphp
+@if ($feedback != true) 
 <section class="container section">
     <h2 class="section-title">Feedbacks</h2>
     <div class="testimonials" id="testimonials">
@@ -188,6 +180,8 @@
         @endforeach
     </div>
 </section>
+@endif
+
 @endsection
 
 @section('scripts')

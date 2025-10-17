@@ -145,9 +145,10 @@ document.addEventListener('DOMContentLoaded', function() {
     const loadingOverlay = document.getElementById('loadingOverlay');
     
     form.addEventListener('submit', function(e) {
+        e.preventDefault(); // Prevent form submission
+        
         const captcha = document.getElementById('captcha').value;
         if (captcha !== '4') {
-            e.preventDefault();
             alert('Por favor, responda corretamente a pergunta de segurança.');
             return;
         }
@@ -170,7 +171,69 @@ document.addEventListener('DOMContentLoaded', function() {
         
         // Prevent any further interaction
         form.style.pointerEvents = 'none';
+        
+        // Send form via AJAX
+        const formData = new FormData(form);
+        
+        fetch(form.action, {
+            method: 'POST',
+            body: formData,
+            headers: {
+                'X-Requested-With': 'XMLHttpRequest',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            }
+        })
+        .then(response => response.json())
+        .then(data => {
+            // Hide loading
+            loadingOverlay.style.display = 'none';
+            
+            if (data.success) {
+                // Show success message
+                showMessage('success', data.message || 'Mensagem enviada com sucesso! ✅');
+                form.reset();
+            } else {
+                // Show error message
+                showMessage('error', data.message || 'Erro ao enviar mensagem. Tente novamente.');
+            }
+        })
+        .catch(error => {
+            // Hide loading
+            loadingOverlay.style.display = 'none';
+            showMessage('error', 'Erro de conexão. Verifique sua internet e tente novamente.');
+        })
+        .finally(() => {
+            // Re-enable form
+            submitBtn.disabled = false;
+            btnText.style.display = 'inline';
+            btnLoading.style.display = 'none';
+            
+            inputs.forEach(input => {
+                input.disabled = false;
+            });
+            
+            form.style.pointerEvents = 'auto';
+        });
     });
+    
+    function showMessage(type, message) {
+        // Remove existing alerts
+        const existingAlerts = document.querySelectorAll('.alert');
+        existingAlerts.forEach(alert => alert.remove());
+        
+        // Create new alert
+        const alert = document.createElement('div');
+        alert.className = `alert alert-${type}`;
+        alert.textContent = message;
+        
+        // Insert at the top of the form
+        form.insertBefore(alert, form.firstChild);
+        
+        // Auto remove after 5 seconds
+        setTimeout(() => {
+            alert.remove();
+        }, 5000);
+    }
 });
 
 function setupThemeToggle() {

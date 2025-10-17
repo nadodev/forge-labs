@@ -17,7 +17,7 @@
                         <div class="contact-details">
                             <h3>WhatsApp</h3>
                             <p>Resposta rápida e direta</p>
-                            <a href="https://wa.me/5511999999999" class="btn primary" target="_blank">Falar pelo WhatsApp</a>
+                            <a href="https://wa.me/5549999195407" class="btn primary" target="_blank">Falar pelo WhatsApp</a>
                         </div>
                     </div>
                     
@@ -25,8 +25,8 @@
                         <div class="contact-icon">📧</div>
                         <div class="contact-details">
                             <h3>E-mail</h3>
-                            <p>contato@gejasystems.com</p>
-                            <a href="mailto:contato@gejasystems.com" class="btn secondary">Enviar e-mail</a>
+                            <p>contato@leonardogeja.com.br</p>
+                            <a href="mailto:contato@leonardogeja.com.br" class="btn secondary">Enviar e-mail</a>
                         </div>
                     </div>
                     
@@ -35,7 +35,7 @@
                         <div class="contact-details">
                             <h3>LinkedIn</h3>
                             <p>Conecte-se profissionalmente</p>
-                            <a href="#" class="btn ghost">Ver no LinkedIn</a>
+                            <a href="https://www.linkedin.com/in/leonardogeja" target="_blank" rel="noopener noreferrer" class="btn ghost">Ver no LinkedIn</a>
                         </div>
                     </div>
                 </div>

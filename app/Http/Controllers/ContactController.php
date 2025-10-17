@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Message;
+use App\Mail\ContactMail;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Validator;
@@ -40,7 +41,7 @@ class ContactController extends Controller
         ]);
 
         // Aqui você pode implementar o envio do email
-        // Mail::to('contato@gejasystems.com')->send(new ContactMail($request->all()));
+        Mail::to('contato@leonardogeja.com.br')->send(new ContactMail($request->all()));
 
         return redirect()->back()->with('success', 'Mensagem enviada com sucesso! ✅');
     }

@@ -28,7 +28,7 @@
             <nav class="nav desktop-nav">
                 <a href="{{ route('home') }}" class="{{ request()->routeIs('home') ? 'active' : '' }}">Home</a>
                 <a href="{{ route('systems.index') }}" class="{{ request()->routeIs('systems.*') ? 'active' : '' }}">Sistemas</a>
-                <a href="https://www.leonardogeja.com.br" class="{{ request()->routeIs('portfolio.*') ? 'active' : '' }}">Portfólio</a>
+                <a href="https://www.leonardogeja.com.br" target="_blank" rel="noopener noreferrer" class="{{ request()->routeIs('portfolio.*') ? 'active' : '' }}">Portfólio</a>
                 <a href="{{ route('about') }}" class="{{ request()->routeIs('about') ? 'active' : '' }}">Sobre</a>
                 <a href="{{ route('contact') }}" class="{{ request()->routeIs('contact') ? 'active' : '' }}">Contato</a>
                 <a href="{{ route('cart.index') }}" class="btn ghost {{ request()->routeIs('cart.*') ? 'active' : '' }}" style="position: relative;">
